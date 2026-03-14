@@ -3,77 +3,392 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD KTP - Tugas</title>
+    <title>🌸 KTP Manager - Aesthetic CRUD 🌸</title>
+
+    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome for cute icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts - Cute font -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <style>
+        * {
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 50%, #f48fb1 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        .main-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 0 0 2px #fff inset;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        h2 {
+            color: #880e4f;
+            font-weight: 700;
+            text-shadow: 3px 3px 0 rgba(255, 255, 255, 0.8);
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        h2:after {
+            content: "🌸";
+            font-size: 2rem;
+            margin-left: 15px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: none;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(136, 14, 79, 0.2);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(136, 14, 79, 0.3);
+        }
+
+        .card-title {
+            color: #ad1457;
+            font-weight: 600;
+            font-size: 1.5rem;
+            border-bottom: 3px dashed #f48fb1;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            color: #880e4f;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+
+        .form-control, .form-select {
+            border: 2px solid #f8bbd0;
+            border-radius: 20px;
+            padding: 10px 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #f06292;
+            box-shadow: 0 0 0 4px rgba(240, 98, 146, 0.2);
+            outline: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #f06292, #ec407a);
+            border: none;
+            border-radius: 20px;
+            padding: 10px 25px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 5px 15px rgba(236, 64, 122, 0.4);
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #ec407a, #d81b60);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(216, 27, 96, 0.5);
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #a5d6a5, #81c784);
+            border: none;
+            border-radius: 20px;
+            padding: 10px 25px;
+            font-weight: 600;
+            color: #1b5e20;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #e0e0e0, #bdbdbd);
+            border: none;
+            border-radius: 20px;
+            padding: 10px 25px;
+            font-weight: 600;
+            color: #424242;
+        }
+
+        .table {
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(136, 14, 79, 0.15);
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .table thead th {
+            background: linear-gradient(45deg, #f48fb1, #f06292);
+            color: white;
+            font-weight: 600;
+            border: none;
+            padding: 15px 10px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .table thead th:first-child {
+            border-radius: 20px 0 0 0;
+        }
+
+        .table thead th:last-child {
+            border-radius: 0 20px 0 0;
+        }
+
+        .table tbody tr {
+            transition: all 0.3s;
+        }
+
+        .table tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: scale(1.01);
+        }
+
+        .table tbody td {
+            padding: 15px 10px;
+            color: #4a4a4a;
+            font-weight: 500;
+            border-bottom: 2px solid #f8bbd0;
+            text-align: center;
+        }
+
+        .btn-warning {
+            background: linear-gradient(45deg, #ffe082, #ffd54f);
+            border: none;
+            border-radius: 15px;
+            padding: 5px 15px;
+            color: #5d4037;
+            font-weight: 600;
+            margin: 0 3px;
+            transition: all 0.3s;
+        }
+
+        .btn-warning:hover {
+            background: linear-gradient(45deg, #ffd54f, #ffb300);
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #ef9a9a, #e57373);
+            border: none;
+            border-radius: 15px;
+            padding: 5px 15px;
+            color: #b71c1c;
+            font-weight: 600;
+            margin: 0 3px;
+            transition: all 0.3s;
+        }
+
+        .btn-danger:hover {
+            background: linear-gradient(45deg, #e57373, #ef5350);
+            transform: translateY(-2px);
+        }
+
+        /* Cute scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #fce4ec;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #f06292;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ec407a;
+        }
+
+        /* Decorative elements */
+        .floating-heart {
+            position: fixed;
+            font-size: 1.5rem;
+            opacity: 0.3;
+            pointer-events: none;
+            animation: floatHeart 10s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0.1;
+            }
+        }
+
+        /* Empty state styling */
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #ad1457;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        /* Alert styling */
+        .alert-custom {
+            background-color: #f8bbd0;
+            border: none;
+            border-radius: 20px;
+            color: #880e4f;
+            font-weight: 600;
+            padding: 15px 25px;
+            box-shadow: 0 5px 15px rgba(136, 14, 79, 0.2);
+            display: none;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
-<body class="container mt-5">
+<body>
 
-<h2 class="mb-4">Manajemen Data KTP</h2>
+<!-- Floating decorative hearts -->
+<div class="floating-heart" style="left: 5%; animation-duration: 8s;">🌸</div>
+<div class="floating-heart" style="left: 15%; animation-duration: 12s;">✨</div>
+<div class="floating-heart" style="left: 25%; animation-duration: 10s;">💫</div>
+<div class="floating-heart" style="left: 35%; animation-duration: 14s;">🌸</div>
+<div class="floating-heart" style="left: 45%; animation-duration: 9s;">✨</div>
+<div class="floating-heart" style="left: 55%; animation-duration: 11s;">💫</div>
+<div class="floating-heart" style="left: 65%; animation-duration: 13s;">🌸</div>
+<div class="floating-heart" style="left: 75%; animation-duration: 8s;">✨</div>
+<div class="floating-heart" style="left: 85%; animation-duration: 12s;">💫</div>
+<div class="floating-heart" style="left: 95%; animation-duration: 10s;">🌸</div>
 
-<!-- FORM INPUT -->
-<div class="card mb-4">
-    <div class="card-body">
-        <h5 class="card-title" id="formTitle">Tambah Data KTP</h5>
-        <form id="ktpForm">
-            <input type="hidden" id="ktpId">
+<div class="container main-container">
 
-            <div class="row g-3">
-                <div class="col-md-4">
-                    <label class="form-label">Nomor KTP</label>
-                    <input type="text" id="nomorKtp" class="form-control" maxlength="16" required>
-                </div>
-
-                <div class="col-md-4">
-                    <label class="form-label">Nama Lengkap</label>
-                    <input type="text" id="namaLengkap" class="form-control" required>
-                </div>
-
-                <div class="col-md-4">
-                    <label class="form-label">Alamat</label>
-                    <input type="text" id="alamat" class="form-control">
-                </div>
-
-                <div class="col-md-3">
-                    <label class="form-label">Tanggal Lahir</label>
-                    <input type="date" id="tanggalLahir" class="form-control">
-                </div>
-
-                <div class="col-md-3">
-                    <label class="form-label">Jenis Kelamin</label>
-                    <select id="jenisKelamin" class="form-select">
-                        <option value="">Pilih...</option>
-                        <option value="Laki-laki">Laki-laki</option>
-                        <option value="Perempuan">Perempuan</option>
-                    </select>
-                </div>
-
-                <div class="col-md-3 d-flex align-items-end">
-                    <button type="submit" id="btnSubmit" class="btn btn-primary me-2">Simpan</button>
-                    <button type="button" id="btnCancel" class="btn btn-secondary" style="display:none;">Batal</button>
-                </div>
-            </div>
-        </form>
+    <!-- Custom Alert -->
+    <div id="customAlert" class="alert-custom">
+        <i class="fas fa-heart me-2"></i>
+        <span id="alertMessage"></span>
     </div>
-</div>
 
-<!-- TABEL DATA KTP -->
-<table class="table table-bordered table-striped">
-    <thead class="table-dark">
-    <tr>
-        <th>ID</th>
-        <th>Nomor KTP</th>
-        <th>Nama Lengkap</th>
-        <th>Alamat</th>
-        <th>Tanggal Lahir</th>
-        <th>Jenis Kelamin</th>
-        <th>Aksi</th>
-    </tr>
-    </thead>
-    <tbody id="ktpTableBody">
-    <!-- Data akan diisi oleh AJAX -->
-    </tbody>
-</table>
+    <h2 class="mb-4">KTP Manager <span style="font-size: 1.2rem; color: #ad1457;"></span></h2>
+
+    <!-- FORM INPUT -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title" id="formTitle">
+                <i class="fas fa-pen-fancy me-2"></i>
+                Tambah Data KTP
+            </h5>
+            <form id="ktpForm">
+                <input type="hidden" id="ktpId">
+
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">
+                            <i class="fas fa-id-card me-1"></i> Nomor KTP
+                        </label>
+                        <input type="text" id="nomorKtp" class="form-control" maxlength="16" placeholder="16 digit" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">
+                            <i class="fas fa-user me-1"></i> Nama Lengkap
+                        </label>
+                        <input type="text" id="namaLengkap" class="form-control" placeholder="Nama lengkap" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">
+                            <i class="fas fa-map-pin me-1"></i> Alamat
+                        </label>
+                        <input type="text" id="alamat" class="form-control" placeholder="Alamat lengkap">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">
+                            <i class="fas fa-calendar me-1"></i> Tanggal Lahir
+                        </label>
+                        <input type="date" id="tanggalLahir" class="form-control">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">
+                            <i class="fas fa-venus-mars me-1"></i> Jenis Kelamin
+                        </label>
+                        <select id="jenisKelamin" class="form-select">
+                            <option value="">Pilih...</option>
+                            <option value="Laki-laki">👨 Laki-laki</option>
+                            <option value="Perempuan">👩 Perempuan</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3 d-flex align-items-end">
+                        <button type="submit" id="btnSubmit" class="btn btn-primary me-2">
+                            <i class="fas fa-save me-1"></i> Simpan
+                        </button>
+                        <button type="button" id="btnCancel" class="btn btn-secondary" style="display:none;">
+                            <i class="fas fa-times me-1"></i> Batal
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TABEL DATA KTP -->
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th><i class="fas fa-id-card me-1"></i> Nomor KTP</th>
+            <th><i class="fas fa-user me-1"></i> Nama Lengkap</th>
+            <th><i class="fas fa-map-pin me-1"></i> Alamat</th>
+            <th><i class="fas fa-calendar me-1"></i> Tanggal Lahir</th>
+            <th><i class="fas fa-venus-mars me-1"></i> Jenis Kelamin</th>
+            <th><i class="fas fa-cogs me-1"></i> Aksi</th>
+        </tr>
+        </thead>
+        <tbody id="ktpTableBody">
+        <!-- Data akan diisi oleh AJAX -->
+        </tbody>
+    </table>
+</div>
 
 <script>
     const apiUrl = '/ktp';
@@ -82,6 +397,15 @@
     $(document).ready(function() {
         loadKtp();
     });
+
+    // Custom alert function
+    function showAlert(message, isSuccess = true) {
+        $('#alertMessage').text(message);
+        $('#customAlert').css('background-color', isSuccess ? '#f8bbd0' : '#ffcdd2')
+            .slideDown()
+            .delay(3000)
+            .slideUp();
+    }
 
     // Handle form submit
     $('#ktpForm').submit(function(e) {
@@ -112,22 +436,37 @@
     function loadKtp() {
         $.get(apiUrl, function(response) {
             let rows = '';
-            response.data.forEach(ktp => {
-                rows += `
+            if (response.data.length === 0) {
+                rows = `
+                    <tr>
+                        <td colspan="7" class="empty-state">
+                            <i class="fas fa-heart-broken"></i>
+                            <p>Belum ada data KTP. Yuk tambah data pertama! 🌸</p>
+                        </td>
+                    </tr>
+                `;
+            } else {
+                response.data.forEach(ktp => {
+                    rows += `
                         <tr>
-                            <td>${ktp.id}</td>
+                            <td><span class="badge bg-secondary">#${ktp.id}</span></td>
                             <td>${ktp.nomorKtp}</td>
                             <td>${ktp.namaLengkap}</td>
                             <td>${ktp.alamat}</td>
                             <td>${ktp.tanggalLahir}</td>
-                            <td>${ktp.jenisKelamin}</td>
+                            <td>${ktp.jenisKelamin === 'Laki-laki' ? '👨 ' : '👩 '}${ktp.jenisKelamin}</td>
                             <td>
-                                <button class="btn btn-warning btn-sm" onclick="editKtp(${ktp.id})">Edit</button>
-                                <button class="btn btn-danger btn-sm" onclick="deleteKtp(${ktp.id})">Hapus</button>
+                                <button class="btn btn-warning btn-sm" onclick="editKtp(${ktp.id})">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm" onclick="deleteKtp(${ktp.id})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </td>
                         </tr>
                     `;
-            });
+                });
+            }
             $('#ktpTableBody').html(rows);
         });
     }
@@ -140,12 +479,12 @@
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function(response) {
-                alert(response.message);
+                showAlert('✨ ' + response.message + ' ✨');
                 resetForm();
                 loadKtp();
             },
             error: function(xhr) {
-                alert('Error: ' + (xhr.responseJSON?.message || 'Gagal menambah data'));
+                showAlert('💔 Error: ' + (xhr.responseJSON?.message || 'Gagal menambah data'), false);
             }
         });
     }
@@ -161,8 +500,8 @@
             $('#tanggalLahir').val(ktp.tanggalLahir);
             $('#jenisKelamin').val(ktp.jenisKelamin);
 
-            $('#formTitle').text('Edit Data KTP');
-            $('#btnSubmit').text('Update').removeClass('btn-primary').addClass('btn-success');
+            $('#formTitle').html('<i class="fas fa-edit me-2"></i>Edit Data KTP');
+            $('#btnSubmit').html('<i class="fas fa-sync-alt me-1"></i> Update').removeClass('btn-primary').addClass('btn-success');
             $('#btnCancel').show();
             isUpdate = true;
         });
@@ -176,28 +515,28 @@
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function(response) {
-                alert(response.message);
+                showAlert('🔄 ' + response.message + ' 🔄');
                 resetForm();
                 loadKtp();
             },
             error: function(xhr) {
-                alert('Error: ' + (xhr.responseJSON?.message || 'Gagal update data'));
+                showAlert('💔 Error: ' + (xhr.responseJSON?.message || 'Gagal update data'), false);
             }
         });
     }
 
     // DELETE - Hapus data
     function deleteKtp(id) {
-        if (confirm('Yakin ingin menghapus data KTP ini?')) {
+        if (confirm('🌸 Yakin ingin menghapus data KTP ini? 🌸')) {
             $.ajax({
                 url: `${apiUrl}/${id}`,
                 type: 'DELETE',
                 success: function(response) {
-                    alert(response.message);
+                    showAlert('🗑️ ' + response.message + ' 🗑️');
                     loadKtp();
                 },
                 error: function(xhr) {
-                    alert('Error: ' + (xhr.responseJSON?.message || 'Gagal hapus data'));
+                    showAlert('💔 Error: ' + (xhr.responseJSON?.message || 'Gagal hapus data'), false);
                 }
             });
         }
@@ -207,8 +546,8 @@
     function resetForm() {
         $('#ktpId').val('');
         $('#ktpForm')[0].reset();
-        $('#formTitle').text('Tambah Data KTP');
-        $('#btnSubmit').text('Simpan').removeClass('btn-success').addClass('btn-primary');
+        $('#formTitle').html('<i class="fas fa-pen-fancy me-2"></i>Tambah Data KTP');
+        $('#btnSubmit').html('<i class="fas fa-save me-1"></i> Simpan').removeClass('btn-success').addClass('btn-primary');
         $('#btnCancel').hide();
         isUpdate = false;
     }
