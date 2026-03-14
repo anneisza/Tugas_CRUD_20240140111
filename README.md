@@ -16,7 +16,7 @@
 
 ---
 
-## 🖥️ FITUR APLIKASI
+## 🖥️ FITUR WEBSITE
 
 **1. CREATE** - Tambah data KTP baru  
 **2. READ** - Lihat semua data KTP  
