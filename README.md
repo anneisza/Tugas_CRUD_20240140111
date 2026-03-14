@@ -1,20 +1,18 @@
 # 📁 Tugas CRUD KTP - 20240140111
 #### || Riza Fitria Istiqomah Zaitunah ||
 
-> **Aplikasi Manajemen Data KTP** berbasis Web dengan Spring Boot + MySQL + AJAX jQuery
+> **Manajemen Data KTP** berbasis Web dengan Spring Boot + MySQL + AJAX jQuery
 
 ---
 ### 🌐 _preview web_
 ![img.png](img.png)
 
 ## 📋 DAFTAR ISI
-- [Fitur Aplikasi](#fitur-aplikasi)
-- [Teknologi yang Digunakan](#teknologi-yang-digunakan)
-- [Struktur Database](#struktur-database)
-- [Dokumentasi API](#dokumentasi-api)
-- [Cara Menjalankan](#cara-menjalankan)
-- [Screenshot Aplikasi](#screenshot-aplikasi)
-- [Author](#author)
+- [Fitur Website](##fitur-aplikasi)
+- [Teknologi yang Digunakan](##teknologi-yang-digunakan)
+- [Struktur Database](##struktur-database)
+- [Dokumentasi API](##dokumentasi-api)
+- [Screenshot Website](##screenshot-aplikasi)
 
 ---
 
@@ -67,22 +65,23 @@ CREATE TABLE `ktp` (
 
 > **Base URL:** http://localhost:8080 
 
+### _Test API dengan postman_
+
 **1. GET All KTP**
 - Endpoint: /ktp 
 - Method: GET 
 - Response:
-
+![img_6.png](img_6.png)
 **2. GET KTP by ID**
 - Endpoint: /ktp/{id}
 - Method: GET
 - Response:
-
+![img_7.png](img_7.png)
 **3. POST Tambah KTP**
 - Endpoint: /ktp
 - Method: POST
 - Headers: Content-Type: application/json 
 - Request Body:
-
 > {
 "nomorKtp": "1234567890123456",
 "namaLengkap": "Budi Santoso",
@@ -92,13 +91,13 @@ CREATE TABLE `ktp` (
 }
 
 - Response:
+![img_5.png](img_5.png)
 
 **4. PUT Update KTP**
 - Endpoint: /ktp/{id} 
 - Method: PUT 
 - Headers: Content-Type: application/json 
 - Request Body:
-
 > {
 "nomorKtp": "1234567890123456",
 "namaLengkap": "Budi Santoso Update",
@@ -108,22 +107,28 @@ CREATE TABLE `ktp` (
 }
 ``
 - Response :
+![img_8.png](img_8.png)
 
 **5. DELETE Hapus KTP**
 - Endpoint: /ktp/{id} 
 - Method: DELETE 
 - Response:
+![img_9.png](img_9.png)
+
+---
 
 > **SCREENSHOOT WEBSITE**
 - Tampilan utama web
-  ![img.png](img.png)
+![img.png](img.png)
 - Form Tambah Data
 ![img_1.png](img_1.png)
 - Data berhasil ditampilkan
 ![img_2.png](img_2.png)
 - Edit data
-- Test API dengan Postman
-- Struktur database
+![img_4.png](img_4.png)
+- Hapus data
+![img_3.png](img_3.png)
+
 
 
 
